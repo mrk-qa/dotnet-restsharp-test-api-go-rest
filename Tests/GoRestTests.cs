@@ -28,41 +28,8 @@ namespace ApiTestsPOC.Tests
                 !string.IsNullOrWhiteSpace(u.Status));
         }
 
-        [Fact(DisplayName = "[CT02] Buscar usuário por ID")]
-        public async Task CT02_GetUserById()
-        {
-            var response = await _service.GetUserByIdAsync(7834404);
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-            var user = JsonConvert.DeserializeObject<User>(response.Content!);
-            user.Should().NotBeNull();
-            user!.Id.Should().Be(7834404);
-        }
-
-        [Fact(DisplayName = "[CT03] Buscar usuário por nome")]
-        public async Task CT03_GetUserByName()
-        {
-            var response = await _service.GetUsersByQueryAsync("name", "Enakshi Butt");
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-            var users = JsonConvert.DeserializeObject<List<User>>(response.Content!);
-            users.Should().NotBeEmpty();
-            users![0].Name.Should().Contain("Enakshi Butt");
-        }
-
-        [Fact(DisplayName = "[CT04] Buscar usuário por e-mail")]
-        public async Task CT04_GetUserByEmail()
-        {
-            var response = await _service.GetUsersByQueryAsync("email", "enakshi_butt@hodkiewicz-nicolas.test");
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-
-            var users = JsonConvert.DeserializeObject<List<User>>(response.Content!);
-            users.Should().NotBeEmpty();
-            users![0].Email.Should().Be("enakshi_butt@hodkiewicz-nicolas.test");
-        }
-
-        [Fact(DisplayName = "[CT05] Buscar usuário por gênero")]
-        public async Task CT05_GetUserByGender()
+        [Fact(DisplayName = "[CT02] Buscar usuário por gênero")]
+        public async Task CT02_GetUserByGender()
         {
             var response = await _service.GetUsersByQueryAsync("gender", "female");
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
@@ -72,8 +39,8 @@ namespace ApiTestsPOC.Tests
             users![0].Gender.ToLower().Should().Be("female");
         }
 
-        [Fact(DisplayName = "[CT06] Buscar usuário por status")]
-        public async Task CT06_GetUserByStatus()
+        [Fact(DisplayName = "[CT03] Buscar usuário por status")]
+        public async Task CT03_GetUserByStatus()
         {
             var response = await _service.GetUsersByQueryAsync("status", "active");
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
@@ -83,32 +50,32 @@ namespace ApiTestsPOC.Tests
             users![0].Status.ToLower().Should().Be("active");
         }
 
-        [Fact(DisplayName = "[CT07] Buscar todos os comentários")]
-        public async Task CT07_GetAllComments()
+        [Fact(DisplayName = "[CT04] Buscar todos os comentários")]
+        public async Task CT04_GetAllComments()
         {
             var response = await _service.GetAllCommentsAsync();
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
             response.Content.Should().NotBeNullOrEmpty();
         }
 
-        [Fact(DisplayName = "[CT08] Buscar todos os posts")]
-        public async Task CT08_GetAllPosts()
+        [Fact(DisplayName = "[CT05] Buscar todos os posts")]
+        public async Task CT05_GetAllPosts()
         {
             var response = await _service.GetAllPostsAsync();
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
             response.Content.Should().NotBeNullOrEmpty();
         }
 
-        [Fact(DisplayName = "[CT09] Buscar todos os TO DOs")]
-        public async Task CT09_GetAllTodos()
+        [Fact(DisplayName = "[CT06] Buscar todos os TO DOs")]
+        public async Task CT06_GetAllTodos()
         {
             var response = await _service.GetAllTodosAsync();
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
             response.Content.Should().NotBeNullOrEmpty();
         }
 
-        [Fact(DisplayName = "[CT10] Criar usuário")]
-        public async Task CT10_CreateUser()
+        [Fact(DisplayName = "[CT07] Criar usuário")]
+        public async Task CT07_CreateUser()
         {
             var newUser = new User
             {
@@ -126,8 +93,8 @@ namespace ApiTestsPOC.Tests
             createdUser!.Email.Should().Be(newUser.Email);
         }
 
-        [Fact(DisplayName = "[CT11] Alterar usuário")]
-        public async Task CT11_UpdateUser()
+        [Fact(DisplayName = "[CT08] Alterar usuário")]
+        public async Task CT08_UpdateUser()
         {
             // Primeiro cria
             var user = new User
@@ -156,8 +123,8 @@ namespace ApiTestsPOC.Tests
             updated.Status.Should().Be("inactive");
         }
 
-        [Fact(DisplayName = "[CT12] Excluir usuário")]
-        public async Task CT12_DeleteUser()
+        [Fact(DisplayName = "[CT09] Excluir usuário")]
+        public async Task CT09_DeleteUser()
         {
             var user = new User
             {

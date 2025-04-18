@@ -7,7 +7,6 @@ namespace ApiTestsPOC.Services
     public class GoRestService
     {
         private readonly RestClient _client;
-        private readonly string _token = "Bearer 3b92fccbccfd8a823022eb7104f32c70fadc514cb008f25f9af45edb5a486302";
 
         public GoRestService()
         {
@@ -39,7 +38,7 @@ namespace ApiTestsPOC.Services
         private RestRequest CreateRequest(string resource, Method method)
         {
             var request = new RestRequest(resource, method);
-            request.AddHeader("Authorization", _token);
+            request.AddHeader("Authorization", EnvConfig.GorestToken);
             request.AddHeader("Content-Type", "application/json");
             return request;
         }
