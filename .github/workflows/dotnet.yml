@@ -32,7 +32,7 @@ jobs:
       run: dotnet build --no-restore
       
     - name: Run API Tests and Generate HTML Report
-      run: dotnet test --no-build --logger "html;LogFileName=TestResults/TestResults.html"
+      run: dotnet test --no-build --logger "html;LogFileName=TestResults.html"
 
     - name: Deploy Test Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
