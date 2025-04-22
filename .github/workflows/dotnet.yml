@@ -31,5 +31,11 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Run API Tests and Generate HTML Report
+      run: dotnet test --no-build --logger "html;LogFileName=TestResults/TestResults.html"
+
+    - name: Deploy Test Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./TestResults
